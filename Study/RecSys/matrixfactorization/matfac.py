@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 class  MatrixFactorization():
     def __init__(self,R,k,lr,reg_param,epochs):
