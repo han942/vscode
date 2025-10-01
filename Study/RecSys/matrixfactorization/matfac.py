@@ -9,17 +9,21 @@ class  MatrixFactorization():
         self.reg_param = reg_param
         self.epochs = epochs
 
-        self.n_users,self.n_items = R.shape
+        self.n_users,self.n_items = self.R.shape
+
+        self.rows,self.cols = np.nonzero(self.R)
+        self.obs_ind = list(zip(self.rows,self.cols))
 
         #P,Q random initialization
         self.P = np.random.rand(self.n_users,self.k)
         self.Q = np.random.rand(self.n_items,self.k)
         pass
 
-    def fit(self):  #1차 - observed data / numpy indexing / epochs
+    def fit(self):
         for n in range(self.epochs):
-            for i in range(self.n_items):
-                for u in range(self.n_users):
+            if n % 5 == 0:
+                print(f'Start epoch : {n}')
+            for u,i in self.obs_ind:
                     if self.R[u,i] == 0:
                         pass
                     else:
@@ -30,6 +34,6 @@ class  MatrixFactorization():
                         self.Q[i,:] = self.Q[i,:] + self.lr * (e* self.P[u,:] - self.reg_param*self.Q[i,:])
         pass
 
-    def predict(self,user_id,item_id):
-        self.R_pred[user_id,item_id] = np.dot(self.P[user_id,:],self.Q[item_id,:])
+    def predict(self):
+        self.R_pred = np.dot(self.P, self.Q.T)
         return self.R_pred

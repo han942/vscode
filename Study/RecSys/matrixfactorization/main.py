@@ -3,7 +3,6 @@ from matfac import MatrixFactorization
 
 if __name__ == '__main__':
     R = R_large
-
     k = 10
     lr = 0.01
     reg_param = 0.01
@@ -16,8 +15,7 @@ if __name__ == '__main__':
     print('Model Training Success')
 
     #Prediction
-    pred_rating = mf_model.predict(0,0)
-    print(f'\n Test : User 0, item 0 rating {pred_rating:.3f}')
-    print(f'Observed Rating: {R[0,0]}')
+    R_pred = mf_model.predict()
+    
 
 
