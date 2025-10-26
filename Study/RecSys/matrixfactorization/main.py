@@ -6,10 +6,10 @@ from sklearn.metrics import root_mean_squared_error
 if __name__ == '__main__':
     R_large = R_large.fillna(0)
     R = np.array(R_large)
-    k = 5
+    k = 10
     lr = 0.01
     reg_param = 0.01
-    epochs = 50
+    epochs = 30
 
     mf_model  = MatrixFactorization(R,k,lr,reg_param,epochs)
 
