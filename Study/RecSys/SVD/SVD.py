@@ -4,7 +4,7 @@ from scipy.linalg import svd
 
 class SVD():
     def __init__(self,R,k,method):
-        self.R = R
+        self.R = R # m*n
         self.k = k
         self.method = method
 

@@ -8,6 +8,8 @@ if __name__ == '__main__':
     R = np.array(R_large)
     k = 10
     method = 0
+    print(f'Model Data : shape: {R.shape} // sparsity: {1 - np.count_nonzero(R)/R.size}')
+
     svd_model = SVD(R,k,method)
 
     print('----Start svd model training-----')
