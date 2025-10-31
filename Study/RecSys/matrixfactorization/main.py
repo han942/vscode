@@ -14,8 +14,8 @@ if __name__ == '__main__':
     mf_model  = MatrixFactorization(k,lr,reg_param,epochs)
 
     print('Start Model Training')
-    mf_model.fit()
+    mf_model.fit(R_train)
     print('\nModel Training Success')
 
     #Prediction
-    R_pred = mf_model.predict()
+    R_pred = mf_model.predict(test)
