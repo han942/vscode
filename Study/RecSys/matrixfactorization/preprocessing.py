@@ -12,4 +12,4 @@ raw_data = pd.read_csv(path / 'u.data',sep='\t',
                    dtype={'user':int,'item':int,'rating':float})
 train,test = train_test_split(raw_data,test_size=0.2,random_state=42)
 
-R_train = pd.pivot_table(train,values='rating',columns='user',index='item')
+R_train = pd.pivot_table(train,values='rating',index='user',columns='item')
