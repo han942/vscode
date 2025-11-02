@@ -11,6 +11,7 @@ class  MatrixFactorization():
         pass
 
     def fit(self,R):
+        self.R_df = R
         self.n_users,self.n_items = R.shape
 
         self.rows,self.cols = np.nonzero(R)
@@ -19,32 +20,100 @@ class  MatrixFactorization():
         self.uilist_train = list(zip(R.index,R.columns))
 
         
-        self.R = np.array(R)
+        self.R = np.array(R)    # u,i is index for array
         #P,Q random initialization
-        self.P = np.random.normal(size=(self.n_users,self.k))
-        self.Q = np.random.normal(size=(self.n_items,self.k))
+        self.P = np.random.random(size=(self.n_users,self.k)) * (6/self.k)
+        self.Q = np.random.random(size=(self.n_items,self.k)) * (6/self.k)
+
+        #Bias
+        self.b_u = np.zeros(self.n_users)
+        self.b_i = np.zeros(self.n_items)
+
+        self.global_mean = R[R>0].mean().mean()
+        
 
         for n in range(self.epochs):
-            if n % 5 == 0:
-                R_pred = np.dot(self.P,self.Q.T)
-                rsme = root_mean_squared_error(self.R,R_pred) #학습오차
-                print(f'Epoch : {n} , RMSE : {rsme:.4f}')
             for u,i in self.obs_ind:
                     if self.R[u,i] == 0:
                         pass
                     else:
-                        e = self.R[u,i] - np.dot(self.P[u,:],self.Q[i,:]) #loss-function
+                        e = self.R[u,i] - (np.dot(self.P[u,:],self.Q[i,:].T) + self.b_u[u] + self.b_i[i] +self.global_mean)  #error
                         #user-update
                         self.P[u,:] = self.P[u,:] + self.lr * (e* self.Q[i,:] - self.reg_param*self.P[u,:])
                         #item-update
                         self.Q[i,:] = self.Q[i,:] + self.lr * (e* self.P[u,:] - self.reg_param*self.Q[i,:])
+
+                        #Bias-update
+                        self.b_u[u] = self.b_u[u] + self.lr * (e - self.reg_param*self.b_u[u])
+                        self.b_i[i] = self.b_i[i] + self.lr * (e - self.reg_param*self.b_i[i])
+            if n % 10 == 0:
+                R_pred = np.dot(self.P,self.Q.T) + self.b_u[:,np.newaxis] + self.b_i[np.newaxis,:] + self.global_mean
+                bias_term =  np.sum(np.square(self.b_u)) + np.sum(np.square(self.b_i))
+                # Loss Function
+                loss = (np.sum(np.square(self.R - R_pred)) + self.reg_param*(np.sum(np.square(self.P)) + np.sum(np.square(self.Q)) +bias_term)) / len(self.obs_ind)
+                print(f'Epoch : {n} , Loss : {loss:4f} , Rooted Loss: {np.sqrt(loss):.2f}')
         pass
 
     def predict(self,test,exclude_unknowns=True):
-        self.R_pred = np.dot(self.P, self.Q.T)
-        pred = []
+        P_df = pd.DataFrame(self.P,index=self.R_df.index)
+        Q_df = pd.DataFrame(self.Q,index=self.R_df.columns)
+        bu_df = pd.DataFrame(self.b_u,index=self.R_df.index)
+        bi_df = pd.DataFrame(self.b_i,index=self.R_df.columns)
+        
+
         if exclude_unknowns == True:
-            test_filtered = test[test['user'].isin(self.uilist_train[0]) & test['item'].isin(self.uilist_train[1])]
-            ulist_test = list(zip(test_filtered['user'],test_filtered['item']))
-            pred.append(self.R_pred[ulist_test])
-        return pred
+            test_filtered = test[test['user'].isin(self.uilist_train[0]) & (test['item'].isin(self.uilist_train[1]))]
+            uilist_test = list(zip(test_filtered['user'],test_filtered['item']))
+            prediction = test_filtered.copy()
+            pred = []
+            for val in uilist_test:
+                pred.append((np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]] + bi_df.loc[val[1]])) # P,Q is array
+            prediction['rating'] = pred
+        
+        else:
+            """
+            Include Unknown (users / items) not shown in train dataset.
+            If user nor item is not in train dataset --> 0 => Rating will be calculated as 0 (Nan)
+            One component (item or user) not in the test dataset --> 1 ==> Rating is calculated as the average of P or Q vector.
+            """
+            uilist_test = list(zip(test['user'],test['item']))
+            prediction = test.copy()
+            pred=[]
+            for val in uilist_test:
+                if (val[0] not in self.uilist_train[0]) & (val[1]not in self.uilist_train[1]):
+                    P_inner_product = np.full(self.k,0)
+                    Q_inner_product = np.full(self.k,0)
+                    bias_u_product = 0
+                    bias_i_product = 0
+                elif val[0] not in self.uilist_train[0]:
+                    P_inner_product = np.full(self.k,1)
+                    Q_inner_product = Q_df.loc[val[1]].T
+                    bias_u_product = 0
+                    bias_i_product = self.b_i[val[1]-1]
+                elif val[1] not in self.uilist_train[1]:
+                    P_inner_product = P_df.iloc[val[0]-1]
+                    Q_inner_product = np.full(self.k,1)
+                    bias_u_product = self.b_u[val[0]-1]
+                    bias_i_product = 0
+                else:
+                    P_inner_product = P_df.loc[val[0]]
+                    Q_inner_product = Q_df.loc[val[1]].T
+                    bias_u_product = self.b_u[val[0]-1]
+                    bias_i_product = self.b_i[val[1]-1]
+
+                pred.append((np.dot(P_inner_product,Q_inner_product)+ self.global_mean + bias_u_product + bias_i_product))
+            prediction['rating'] = pred
+            test_filtered = test
+
+        # for val in uilist_test:
+        #     pred.append(np.dot(self.P[val[0]],self.Q[val[1]].T))
+        
+        
+        #pred.append(self.R_pred[uilist_test])
+        #pred = [test_filtered['user'],test_filtered['item'],pred]
+
+        #else:
+        #test_filtered = test[test['user'].isin(self.uilist_train[0]) & test['item'].isin(self.uilist_train[1])]
+        #uilist_test = list(zip(test_filtered['user'],test_filtered['item']))
+        #pred.append(self.R_pred[uilist_test])
+        return prediction,test_filtered

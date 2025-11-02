@@ -1,0 +1,63 @@
+k = 10 lr = 0.0001 reg_param = 0.02 epochs = 50 exclude_unknowns=False 
+
+Fold 1 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 202.549253 , Rooted Loss: 14.23
+Epoch : 10 , Loss : 166.972758 , Rooted Loss: 12.92
+Epoch : 20 , Loss : 146.691763 , Rooted Loss: 12.11
+Epoch : 30 , Loss : 133.589368 , Rooted Loss: 11.56
+Epoch : 40 , Loss : 124.599293 , Rooted Loss: 11.16
+
+Model Training Success
+RMSE : 3.7145 , Precision@k : 0.5255 , Recall@k : 0.5895
+Fold 1 / Fold 5 Completed
+
+Fold 2 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 206.330630 , Rooted Loss: 14.36
+Epoch : 10 , Loss : 170.739131 , Rooted Loss: 13.07
+Epoch : 20 , Loss : 150.218938 , Rooted Loss: 12.26
+Epoch : 30 , Loss : 136.867173 , Rooted Loss: 11.70
+Epoch : 40 , Loss : 127.640495 , Rooted Loss: 11.30
+
+Model Training Success
+RMSE : 3.7199 , Precision@k : 0.5609 , Recall@k : 0.5920
+Fold 2 / Fold 5 Completed
+
+Fold 3 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 207.317171 , Rooted Loss: 14.40
+Epoch : 10 , Loss : 170.956063 , Rooted Loss: 13.08
+Epoch : 20 , Loss : 150.283415 , Rooted Loss: 12.26
+Epoch : 30 , Loss : 136.988946 , Rooted Loss: 11.70
+Epoch : 40 , Loss : 127.953837 , Rooted Loss: 11.31
+
+Model Training Success
+RMSE : 3.6962 , Precision@k : 0.5450 , Recall@k : 0.5603
+Fold 3 / Fold 5 Completed
+
+Fold 4 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 206.887548 , Rooted Loss: 14.38
+Epoch : 10 , Loss : 170.907495 , Rooted Loss: 13.07
+Epoch : 20 , Loss : 150.252026 , Rooted Loss: 12.26
+Epoch : 30 , Loss : 136.808159 , Rooted Loss: 11.70
+Epoch : 40 , Loss : 127.472040 , Rooted Loss: 11.29
+
+Model Training Success
+RMSE : 3.6958 , Precision@k : 0.5538 , Recall@k : 0.5440
+Fold 4 / Fold 5 Completed
+
+Fold 5 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 199.323633 , Rooted Loss: 14.12
+Epoch : 10 , Loss : 163.328928 , Rooted Loss: 12.78
+Epoch : 20 , Loss : 143.157645 , Rooted Loss: 11.96
+Epoch : 30 , Loss : 130.311445 , Rooted Loss: 11.42
+Epoch : 40 , Loss : 121.726620 , Rooted Loss: 11.03
+
+Model Training Success
+RMSE : 3.6947 , Precision@k : 0.5412 , Recall@k : 0.5235
+Fold 5 / Fold 5 Completed
+-------- Model Training Finished --------
+RMSE : 3.70422 , Precision@k : 0.54530 , Recall@k : 0.56188

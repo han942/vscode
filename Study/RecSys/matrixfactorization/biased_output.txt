@@ -1,0 +1,6 @@
+
+Fold 1 / Fold 5 Start
+Start Model Training
+Epoch : 0 , Loss : 368.342711 , Rooted Loss: 19.19
+Epoch : 10 , Loss : 337.548582 , Rooted Loss: 18.37
+Epoch : 20 , Loss : 320.469305 , Rooted Loss: 17.90
