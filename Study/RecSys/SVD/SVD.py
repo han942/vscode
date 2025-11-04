@@ -3,22 +3,16 @@ import pandas as pd
 from scipy.linalg import svd
 
 class SVD():
-    def __init__(self,R,k,method):
+    def __init__(self,R,k,epochs):
         self.R = R # m*n
         self.k = k
-        self.method = method
+        self.epochs = epochs
 
-        if self.method==0: #numpy의 SVD decomposition alogorithm
-            self.U,self.s,self.V = np.linalg.svd(self.R)
-            self.sigma = np.zeros(self.R.shape)
-            self.sigma[:len(self.s),:len(self.s)] = np.diag(self.s)
-            pass
-        
-        else: # Scipy's SVD decomposition
-            self.U,self.s,self.V = svd(self.R)
-            self.sigma = np.zeros(self.R.shape)
-            self.sigma[:len(self.s),:len(self.s)] = np.diag(self.s)
-            pass
+         # Scipy's SVD decomposition
+        self.U,self.s,self.V = svd(self.R)
+        self.sigma = np.zeros(self.R.shape)
+        self.sigma[:len(self.s),:len(self.s)] = np.diag(self.s)
+        pass
         
     def fit(self):
         self.U_k = self.U[:,:self.k]

@@ -14,16 +14,15 @@ class  MatrixFactorization():
         self.R_df = R
         self.n_users,self.n_items = R.shape
 
-        self.rows,self.cols = np.nonzero(R)
-        self.obs_ind = list(zip(self.rows,self.cols))
+        self.obs_rows,self.obs_cols = np.nonzero(R) #R의 observed data에 대한 index 반환
+        self.obs_ind = list(zip(self.obs_rows,self.obs_cols))
         
         self.uilist_train = list(zip(R.index,R.columns))
 
-        
         self.R = np.array(R)    # u,i is index for array
         #P,Q random initialization
-        self.P = np.random.random(size=(self.n_users,self.k)) * (6/self.k)
-        self.Q = np.random.random(size=(self.n_items,self.k)) * (6/self.k)
+        self.P = np.random.random(size=(self.n_users,self.k)) *(6/self.k)
+        self.Q = np.random.random(size=(self.n_items,self.k)) *(6/self.k)
 
         #Bias
         self.b_u = np.zeros(self.n_users)
@@ -33,7 +32,7 @@ class  MatrixFactorization():
         
 
         for n in range(self.epochs):
-            for u,i in self.obs_ind:
+            for u,i in self.obs_ind: #index 기준으로 작동
                     if self.R[u,i] == 0:
                         pass
                     else:
@@ -52,7 +51,7 @@ class  MatrixFactorization():
                 # Loss Function
                 loss = (np.sum(np.square(self.R - R_pred)) + self.reg_param*(np.sum(np.square(self.P)) + np.sum(np.square(self.Q)) +bias_term)) / len(self.obs_ind)
                 print(f'Epoch : {n} , Loss : {loss:4f} , Rooted Loss: {np.sqrt(loss):.2f}')
-        pass
+        return self.P,self.Q,self.b_u,self.b_i
 
     def predict(self,test,exclude_unknowns=True):
         P_df = pd.DataFrame(self.P,index=self.R_df.index)
@@ -77,6 +76,7 @@ class  MatrixFactorization():
             One component (item or user) not in the test dataset --> 1 ==> Rating is calculated as the average of P or Q vector.
             """
             uilist_test = list(zip(test['user'],test['item']))
+    
             prediction = test.copy()
             pred=[]
             for val in uilist_test:
@@ -89,17 +89,17 @@ class  MatrixFactorization():
                     P_inner_product = np.full(self.k,1)
                     Q_inner_product = Q_df.loc[val[1]].T
                     bias_u_product = 0
-                    bias_i_product = self.b_i[val[1]-1]
+                    bias_i_product = int(bi_df.loc[val[1]])
                 elif val[1] not in self.uilist_train[1]:
-                    P_inner_product = P_df.iloc[val[0]-1]
+                    P_inner_product = P_df.loc[val[0]]
                     Q_inner_product = np.full(self.k,1)
-                    bias_u_product = self.b_u[val[0]-1]
+                    bias_u_product = int(bu_df.loc[val[0]])
                     bias_i_product = 0
                 else:
                     P_inner_product = P_df.loc[val[0]]
                     Q_inner_product = Q_df.loc[val[1]].T
-                    bias_u_product = self.b_u[val[0]-1]
-                    bias_i_product = self.b_i[val[1]-1]
+                    bias_u_product = int(bu_df.loc[val[0]])
+                    bias_i_product = int(bi_df.loc[val[1]])
 
                 pred.append((np.dot(P_inner_product,Q_inner_product)+ self.global_mean + bias_u_product + bias_i_product))
             prediction['rating'] = pred
