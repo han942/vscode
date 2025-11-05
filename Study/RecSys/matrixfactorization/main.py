@@ -24,12 +24,12 @@ if __name__ == '__main__':
     n = 1
     for b,t in data_list:
         print(f'\nFold {n} / Fold 5 Start')
-        train,test,R_train = load_data(b,t,data_indicator=0)
+        train,test,R_train = load_data(b,t,data_indicator=1)
 
         R_train = R_train.fillna(0)
         k = 10
-        lr = 0.007
-        reg_param = 0.001
+        lr = 0.0001
+        reg_param = 0.02
         epochs = 50
 
         mf_model  = MatrixFactorization(k,lr,reg_param,epochs)
