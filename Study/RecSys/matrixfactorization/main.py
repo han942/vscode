@@ -24,7 +24,7 @@ if __name__ == '__main__':
     n = 1
     for b,t in data_list:
         print(f'\nFold {n} / Fold 5 Start')
-        train,test,R_train = load_data(b,t,data_indicator=1)
+        train,test,R_train = load_data(b,t,data_indicator=0)
 
         R_train = R_train.fillna(0)
         k = 10
@@ -35,16 +35,16 @@ if __name__ == '__main__':
         mf_model  = MatrixFactorization(k,lr,reg_param,epochs)
 
         print('Start Model Training')
-        mf_model.fit(R_train)
+        mf_model.fit(train)
         print('\nModel Training Success')
 
         #Prediction
-        prediction,test = mf_model.predict(test,exclude_unknowns=False)
+        prediction,test = mf_model.predict(test,exclude_unknowns=True)
     
         #Evaluation
         rsme_par = root_mean_squared_error(prediction['rating'].values,test['rating'].values)
-        prec_at_k_par = precision_at_k(prediction,test,k=10,threshold=3)
-        rec_at_k_par = recall_at_k(prediction,test,k=10,threshold=3)
+        prec_at_k_par = precision_at_k(prediction,test,k=10)
+        rec_at_k_par = recall_at_k(prediction,test,k=10)
         ndcg_at_k_par = ndcg_at_k(prediction,test,k=10)
 
         rmse.append(rsme_par)

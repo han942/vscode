@@ -10,15 +10,17 @@ class  MatrixFactorization():
         self.epochs = epochs
         pass
 
-    def fit(self,R):
+    def fit(self,train):
+        R = pd.pivot_table(train,values='rating',index='user',columns='item')
+        R = R.fillna(0)
         self.R_df = R
         self.n_users,self.n_items = R.shape
 
         self.obs_rows,self.obs_cols = np.nonzero(R) #R의 observed data에 대한 index 반환
         self.obs_ind = list(zip(self.obs_rows,self.obs_cols))
-        
-        self.uilist_train = list(zip(R.index,R.columns))
 
+        self.train_user,self.train_item = train['user'].unique(),train['item'].unique()
+        
         self.R = np.array(R)    # u,i is index for array
         #P,Q random initialization
         self.P = np.random.random(size=(self.n_users,self.k)) *(6/self.k)
@@ -61,12 +63,12 @@ class  MatrixFactorization():
         
 
         if exclude_unknowns == True:
-            test_filtered = test[test['user'].isin(self.uilist_train[0]) & (test['item'].isin(self.uilist_train[1]))]
+            test_filtered = test[(test['user'].isin(self.train_user)) & (test['item'].isin(self.train_item))]
             uilist_test = list(zip(test_filtered['user'],test_filtered['item']))
             prediction = test_filtered.copy()
             pred = []
             for val in uilist_test:
-                pred.append((np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]] + bi_df.loc[val[1]])) # P,Q is array
+                pred.append(float(np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]].values + bi_df.loc[val[1]].values)) # P,Q is array
             prediction['rating'] = pred
         
         else:

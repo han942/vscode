@@ -47,23 +47,25 @@ def hit_rate_at_k(y_pred,y_true,k): #Predicted item 중에서 Hit 한 item 갯�
         top_pred_items = y_pred.loc[y_pred['user']==user_num].sort_values('rating',ascending=False)[:k]
         hit.append(len(set(top_test_items['item']).intersection(set(top_pred_items['item']))) / k)   #Intersection method requires set() data
     return sum(hit) / len(hit)
-
-def precision_at_k(y_pred,y_true,k,threshold):
+"""
+Sort_values를 method마다 호출하는건 비효율적, 이를 따로 변수로 지정하여 설정하길
+"""
+def precision_at_k(y_pred,y_true,k):
     prec_at_k = []
     for user_num in y_pred['user'].unique():
         top_test_items = y_true.loc[(y_true['user']==user_num)].sort_values('rating',ascending=False)
-        top_test_rel_items = top_test_items.loc[top_test_items['rating'] > np.mean(top_test_items['rating'])]
+        top_test_rel_items = top_test_items
         top_pred_items = y_pred.loc[(y_pred['user']==user_num)].sort_values('rating',ascending=False)[:k]      
         prec_at_k.append(len(set(top_test_rel_items['item']).intersection(set(top_pred_items['item']))) / k)
     return np.mean(prec_at_k)
 
-def recall_at_k(y_pred,y_true,k,threshold): #Relevant Item 중에서 Hit (predict)한 item 갯수
+def recall_at_k(y_pred,y_true,k): #Relevant Item 중에서 Hit (predict)한 item 갯수
     rec_at_k = []
     for user_num in y_pred['user'].unique():
         top_test_items = y_true.loc[(y_true['user']==user_num)].sort_values('rating',ascending=False)
-        top_test_rel_items = top_test_items[top_test_items['rating'] > np.mean(top_test_items['rating'])]
-        top_pred_items = y_pred.loc[(y_pred['user']==user_num)].sort_values('rating',ascending=False)[:k]
-        top_pred_rel_items = top_pred_items[top_pred_items['rating'] > np.mean(top_test_items['rating'])]
+        top_test_rel_items = top_test_items
+        top_pred_items = y_pred.loc[(y_pred['user']==user_num)].sort_values('rating',ascending=False)
+        top_pred_rel_items = top_pred_items[:k]
         rec_at_k.append(len(set(top_test_rel_items['item']).intersection(set(top_pred_rel_items['item']))) / len(top_test_rel_items) if len(top_test_rel_items) >0 else 0)   #Intersection method requires set() data
     return np.mean(rec_at_k)
 
@@ -81,3 +83,6 @@ def ndcg_at_k(y_pred,y_true,k):
        ndcg_k.append(dcg_k / idcg_k if idcg_k>0 else 0)
     
     return np.mean(ndcg_k)
+
+#VAE // mult-VAE
+#LightGCN : pyG // recbole
