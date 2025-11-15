@@ -62,7 +62,7 @@ class  MatrixFactorization():
         bi_df = pd.DataFrame(self.b_i,index=self.R_df.columns)
         
 
-        if exclude_unknowns == True:
+        if exclude_unknowns == True: 
             test_filtered = test[(test['user'].isin(self.train_user)) & (test['item'].isin(self.train_item))]
             uilist_test = list(zip(test_filtered['user'],test_filtered['item']))
             prediction = test_filtered.copy()
@@ -71,51 +71,40 @@ class  MatrixFactorization():
                 pred.append(float(np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]].values + bi_df.loc[val[1]].values)) # P,Q is array
             prediction['rating'] = pred
         
-        else:
-            """
-            Include Unknown (users / items) not shown in train dataset.
-            If user nor item is not in train dataset --> 0 => Rating will be calculated as 0 (Nan)
-            One component (item or user) not in the test dataset --> 1 ==> Rating is calculated as the average of P or Q vector.
-            """
-            uilist_test = list(zip(test['user'],test['item']))
+        # else:
+        #     """
+        #     Include Unknown (users / items) not shown in train dataset.
+        #     If user nor item is not in train dataset --> 0 => Rating will be calculated as 0 (Nan)
+        #     One component (item or user) not in the test dataset --> 1 ==> Rating is calculated as the average of P or Q vector.
+        #     """
+        #     uilist_test = list(zip(test['user'],test['item']))
     
-            prediction = test.copy()
-            pred=[]
-            for val in uilist_test:
-                if (val[0] not in self.uilist_train[0]) & (val[1]not in self.uilist_train[1]):
-                    P_inner_product = np.full(self.k,0)
-                    Q_inner_product = np.full(self.k,0)
-                    bias_u_product = 0
-                    bias_i_product = 0
-                elif val[0] not in self.uilist_train[0]:
-                    P_inner_product = np.full(self.k,1)
-                    Q_inner_product = Q_df.loc[val[1]].T
-                    bias_u_product = 0
-                    bias_i_product = int(bi_df.loc[val[1]])
-                elif val[1] not in self.uilist_train[1]:
-                    P_inner_product = P_df.loc[val[0]]
-                    Q_inner_product = np.full(self.k,1)
-                    bias_u_product = int(bu_df.loc[val[0]])
-                    bias_i_product = 0
-                else:
-                    P_inner_product = P_df.loc[val[0]]
-                    Q_inner_product = Q_df.loc[val[1]].T
-                    bias_u_product = int(bu_df.loc[val[0]])
-                    bias_i_product = int(bi_df.loc[val[1]])
+        #     prediction = test.copy()
+        #     pred=[]
+        #     for val in uilist_test:
+        #         if (val[0] not in self.uilist_train[0]) & (val[1]not in self.uilist_train[1]):
+        #             P_inner_product = np.full(self.k,0)
+        #             Q_inner_product = np.full(self.k,0)
+        #             bias_u_product = 0
+        #             bias_i_product = 0
+        #         elif val[0] not in self.uilist_train[0]:
+        #             P_inner_product = np.full(self.k,1)
+        #             Q_inner_product = Q_df.loc[val[1]].T
+        #             bias_u_product = 0
+        #             bias_i_product = int(bi_df.loc[val[1]])
+        #         elif val[1] not in self.uilist_train[1]:
+        #             P_inner_product = P_df.loc[val[0]]
+        #             Q_inner_product = np.full(self.k,1)
+        #             bias_u_product = int(bu_df.loc[val[0]])
+        #             bias_i_product = 0
+        #         else:
+        #             P_inner_product = P_df.loc[val[0]]
+        #             Q_inner_product = Q_df.loc[val[1]].T
+        #             bias_u_product = int(bu_df.loc[val[0]])
+        #             bias_i_product = int(bi_df.loc[val[1]])
 
-                pred.append((np.dot(P_inner_product,Q_inner_product)+ self.global_mean + bias_u_product + bias_i_product))
-            prediction['rating'] = pred
-            test_filtered = test
+        #         pred.append((np.dot(P_inner_product,Q_inner_product)+ self.global_mean + bias_u_product + bias_i_product))
+        #     prediction['rating'] = pred
+        #     test_filtered = test
 
-        # for val in uilist_test:
-        #     pred.append(np.dot(self.P[val[0]],self.Q[val[1]].T))
-        
-        
-        #pred.append(self.R_pred[uilist_test])
-        #pred = [test_filtered['user'],test_filtered['item'],pred]
-
-        #else:
-        #test_filtered = test[test['user'].isin(self.uilist_train[0]) & test['item'].isin(self.uilist_train[1])]
-        #uilist_test = list(zip(test_filtered['user'],test_filtered['item']))
-        #pred.append(self.R_pred[uilist_test])
         return prediction,test_filtered
