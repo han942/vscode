@@ -20,17 +20,19 @@ if __name__== '__main__':
     n = 1
 
     print(f'\nFold {n} / Fold 5 Start')
-    train,test = load_data()
+    train,test,R_train,R_test = load_data()
     
-    tr_n_users = train['user'].max()
-    tr_n_items = train['item'].max()
+    tr_n_users = R_train.shape[0]
+    tr_n_items = R_train.shape[1]
 
+    R_train = R_train.values
+    R_test = R_test.values
 
-    train = MLData(train)
-    test = MLData(test)
+    R_train = MLData(R_train)
+    R_test = MLData(R_test)
 
-    train_loader = DataLoader(train,batch_size=32,shuffle=True)
-    test_loader = DataLoader(test,batch_size=32,shuffle=True)
+    train_loader = DataLoader(R_train,batch_size=32,shuffle=True)
+    test_loader = DataLoader(R_test,batch_size=32,shuffle=True)
 
     hidden_dim= [600,200]
     latent_dim = 50
@@ -41,10 +43,8 @@ if __name__== '__main__':
     mvae_model  = mult_vae(tr_n_users,tr_n_items,hidden_dim,latent_dim,
                            drop_encoder,drop_decoder,beta).to(device)
     
-    optimizer = torch.optim.Adam(mvae_model.parameters(),lr=0.1,weight_decay=0.0)
+    optimizer = torch.optim.Adam(mvae_model.parameters(),lr=0.001,weight_decay=0.0)
+    print('Start Model Training')
     
     train_model(mvae_model,train_loader,optimizer,total_epochs=100,annealing_epochs=10,device=device)
-
-    print('Start Model Training')
-    (train)
     print('\nModel Training Success')

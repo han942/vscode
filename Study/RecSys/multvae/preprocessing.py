@@ -11,15 +11,12 @@ import torch
 from torch.utils.data import Dataset
 
 class MLData(Dataset):
-    def __init__(self,df):
-        self.user = torch.tensor(df['user'].values,dtype=torch.long)
-        self.item = torch.tensor(df['item'].values,dtype=torch.long)
-        self.rating = torch.tensor(df['rating'].values,dtype=torch.long)
-    
+    def __init__(self,R):
+        self.data = R.astype(np.float32)
     def __len__(self):
-        return len(self.rating)
+        return self.data.shape[0]
     def __getitem__(self,idx):
-        return self.user[idx],self.movie[idx],self.rating[idx]
+        return torch.FloatTensor(self.data[idx])
 
 
 def load_data():
@@ -34,7 +31,16 @@ def load_data():
 
     print(f'Data Size //  original: {data.shape}, train:{train.shape}, test:{test.shape}')
 
-    return train,test
+    R_train = pd.pivot_table(train,values='rating',index='user',columns='item',fill_value=0)
+    R_test = pd.pivot_table(test,values='rating',index='user',columns='item',fill_value=0)
+    
+    """
+    Generating User-item click matrix 
+    """
+    R_train[R_train>0] = 1.0
+    R_test[R_test>0] = 1.0
+
+    return train,test,R_train,R_test
 
 def hit_rate_at_k(y_pred,y_true,k): #Predicted item 중에서 Hit 한 item 갯수
     hit = []

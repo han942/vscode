@@ -27,8 +27,8 @@ class mult_vae(nn.Module):
             enc_layers.append(nn.Tanh())
             current_enc_dim = h_dim
         self.mlp = nn.Sequential(*enc_layers)
-        self.enc_fc_mu = nn.Linear(self.hidden_dim,self.latent_dim)
-        self.enc_fc_log_var = nn.Linear(self.hidden_dim,self.latent_dim)
+        self.enc_fc_mu = nn.Linear(current_enc_dim,self.latent_dim)
+        self.enc_fc_log_var = nn.Linear(current_enc_dim,self.latent_dim)
 
         #Decoder Layers
         dec_hidden_dim = list(reversed(self.hidden_dim))
@@ -39,8 +39,8 @@ class mult_vae(nn.Module):
             dec_layers.append(nn.Tanh())
             current_dec_dim = h_dim
         self.dec_mlp = nn.Sequential(*dec_layers)
+        self.dec_fc_output = nn.Linear(current_dec_dim,self.n_items)
         self.dec_output_dropout = nn.Dropout(self.drop_decoder)
-
 
         pass
     
@@ -63,22 +63,25 @@ class mult_vae(nn.Module):
     def decoder(self,z):
         h = self.dec_mlp(z)
         h = self.dec_output_dropout(h)
+
+        h = self.dec_fc_output(h)
         return h
     
-    def foward(self,train):
+    def forward(self,train):
         mu,log_var = self.encoder(train)
         if self.training:
             z = self.reparametrization(mu,log_var)
         else:
             z = mu
-        logits = self.decode(z)
+        logits = self.decoder(z)
 
         return logits,mu,log_var
     
 
     def loss_function(self,logits,x,mu,log_var,beta=1.0):
         log_probs = F.log_softmax(logits,dim=1)
-        recon_loss = -torch.sum(log_probs * x,dim=1).mean()
+        recon_loss = -torch.sum(log_probs * x,dim=1)
+        recon_loss = recon_loss.mean()
 
         kl_loss = -0.5 * torch.sum(1+log_var-mu.pow(2) - log_var.exp(),dim=1).mean()
         loss = recon_loss + beta*kl_loss
@@ -88,22 +91,23 @@ class mult_vae(nn.Module):
 def train_model(model,train_loader,optimizer,total_epochs,annealing_epochs,device):
     for epoch in range(total_epochs):
         model.train()
-        if epoch < annealing_epochs:
+        if epoch <= annealing_epochs:
             beta = epoch * (1.0/annealing_epochs)
         else:
             beta=1.0
-        
+        total_loss_epoch=0
         for batch_data in train_loader:
             x = batch_data.to(device)
 
             optimizer.zero_grad()
             logits,mu,log_var = model(x)
 
-            recon_loss,kl_loss,loss = model.loss_function(logits,mu,log_var,beta)
+            recon_loss,kl_loss,loss = model.loss_function(logits,x,mu,log_var,beta)
             loss.backward()
             optimizer.step()
 
             total_loss_epoch += loss.item()
         avg_loss = total_loss_epoch / len(train_loader)
-        print(f"Epoch {epoch+1}/{total_epochs} , beta: {beta:.4f}, avg_loss : {avg_loss:.4f}")
+        if epoch % 10 ==0:
+            print(f"Epoch {epoch}/{total_epochs} , beta: {beta:.4f}, avg_loss : {avg_loss:.4f}")
     print('Training Compelete')
