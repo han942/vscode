@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-
+import numpy as np
 
 class mult_vae(nn.Module):
     def __init__(self,n_users,n_items,hidden_dim,latent_dim,drop_encoder,
@@ -41,7 +41,6 @@ class mult_vae(nn.Module):
         self.dec_mlp = nn.Sequential(*dec_layers)
         self.dec_fc_output = nn.Linear(current_dec_dim,self.n_items)
         self.dec_output_dropout = nn.Dropout(self.drop_decoder)
-
         pass
     
     def encoder(self,x):
@@ -77,10 +76,21 @@ class mult_vae(nn.Module):
 
         return logits,mu,log_var
     
+    def predict(self,x,k=10):
+        self.eval()
+
+        with torch.no_grad():
+            mu,log_var = self.encoder(x)
+            z = mu
+            logits = self.decoder(z)
+        _,ind = torch.topk(logits,k,dim=1)
+        
+        return ind
+    
 
     def loss_function(self,logits,x,mu,log_var,beta=1.0):
         log_probs = F.log_softmax(logits,dim=1)
-        recon_loss = -torch.sum(log_probs * x,dim=1)
+        recon_loss = -torch.sum(log_probs * x, dim=1)
         recon_loss = recon_loss.mean()
 
         kl_loss = -0.5 * torch.sum(1+log_var-mu.pow(2) - log_var.exp(),dim=1).mean()
@@ -95,6 +105,7 @@ def train_model(model,train_loader,optimizer,total_epochs,annealing_epochs,devic
             beta = epoch * (1.0/annealing_epochs)
         else:
             beta=1.0
+
         total_loss_epoch=0
         for batch_data in train_loader:
             x = batch_data.to(device)
@@ -108,6 +119,22 @@ def train_model(model,train_loader,optimizer,total_epochs,annealing_epochs,devic
 
             total_loss_epoch += loss.item()
         avg_loss = total_loss_epoch / len(train_loader)
-        if epoch % 10 ==0:
+        if (epoch <= annealing_epochs):
             print(f"Epoch {epoch}/{total_epochs} , beta: {beta:.4f}, avg_loss : {avg_loss:.4f}")
+        elif (epoch > annealing_epochs) & (epoch %10 ==0):
+            print(f"Epoch {epoch}/{total_epochs} , beta: {beta:.4f}, avg_loss : {avg_loss:.4f}")
+
     print('Training Compelete')
+
+def evaluate(model,test_loader,k,device):
+    model.eval()
+
+    all_preds = []
+    with torch.no_grad():
+        for batch_data in test_loader:
+            x = batch_data.to(device)
+
+            topk_ind = model.predict(x,k=k)
+            all_preds.append(topk_ind.cpu().numpy())
+    
+    return np.concatenate(all_preds,axis=0)

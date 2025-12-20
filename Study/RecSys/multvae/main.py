@@ -1,5 +1,5 @@
 from preprocessing import *
-from multvae import mult_vae,train_model
+from multvae import mult_vae,train_model,evaluate
 import numpy as np
 from torch.utils.data import DataLoader
 
@@ -32,7 +32,7 @@ if __name__== '__main__':
     R_test = MLData(R_test)
 
     train_loader = DataLoader(R_train,batch_size=32,shuffle=True)
-    test_loader = DataLoader(R_test,batch_size=32,shuffle=True)
+    test_loader = DataLoader(R_test,batch_size=32,shuffle=False)
 
     hidden_dim= [600,200]
     latent_dim = 50
@@ -48,3 +48,8 @@ if __name__== '__main__':
     
     train_model(mvae_model,train_loader,optimizer,total_epochs=100,annealing_epochs=10,device=device)
     print('\nModel Training Success')
+
+
+    top_k_recs = evaluate(mvae_model,test_loader,k=10,device=device)
+    print('\n Model Prediction Sucess')
+

@@ -40,6 +40,10 @@ def load_data():
     R_train[R_train>0] = 1.0
     R_test[R_test>0] = 1.0
 
+    all_items = np.arange(1,data.shape[1]+1)
+    R_train = R_train.reindex(columns=all_items,fill_value=0)
+    R_test = R_test.reindex(columns=all_items,fill_value=0)
+
     return train,test,R_train,R_test
 
 def hit_rate_at_k(y_pred,y_true,k): #Predicted item 중에서 Hit 한 item 갯수
