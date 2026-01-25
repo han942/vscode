@@ -16,7 +16,7 @@ class  MatrixFactorization():
         self.R_df = R
         self.n_users,self.n_items = R.shape
 
-        self.obs_rows,self.obs_cols = np.nonzero(R) #R의 observed data에 대한 index 반환
+        self.obs_rows,self.obs_cols = np.nonzero(R) #Index conversion for observed data in UImatrix(R)
         self.obs_ind = list(zip(self.obs_rows,self.obs_cols))
 
         self.train_user,self.train_item = train['user'].unique(),train['item'].unique()
@@ -34,7 +34,7 @@ class  MatrixFactorization():
         
 
         for n in range(self.epochs):
-            for u,i in self.obs_ind: #index 기준으로 작동
+            for u,i in self.obs_ind: #Index-level operating
                     if self.R[u,i] == 0:
                         pass
                     else:
