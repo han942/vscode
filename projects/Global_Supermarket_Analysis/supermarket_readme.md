@@ -1,3 +1,4 @@
 # Global Supermarket Analysis (EDA)
 
-- Conducting EDA of 
+## Project Overview
+Conducting EDA mainly for supermarket retail data. 
