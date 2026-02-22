@@ -9,7 +9,7 @@ This folder contains my main data science and analytics projects, organized by t
 - Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
 - Goal: Exploratory data analysis and visualization on global supermarket sales data
 - Tech stack: Python, Pandas, Matplotlib/Seaborn
-- Main notebook/script: `supermarket_analysis.ipynb` / `Global_supermarket_Analysis.pdf`
+- Main notebook/script: `supermarket_analysis.ipynb`, `Global_supermarket_Analysis.pdf`
 - Highlights:
   - Comprehensive EDA on global sales and logistics data
   - Loss analysis on specific features that is crucial in economic industry
