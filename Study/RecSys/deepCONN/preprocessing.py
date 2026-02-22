@@ -1,9 +1,7 @@
 import pandas as pd
 import numpy as np
+from config import Config
 
-from gensim.models import Word2Vec
-import re
-import pickle
+config = Config()
 
-class datapreprocessor:
-    
+df = 
