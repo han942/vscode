@@ -22,7 +22,7 @@ This folder contains my main data science and analytics projects, organized by t
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
 - Tech stack: Python, LLM Fine-Tuning, PyTorch
-- Main notebook/script: `nlp_newspaper.ipynb`
+- Main notebook/script: `Final_NLP_Newspaper.ipynb`
 - Highlights:
   - Constructing parallel corpus using LLM(GPT-4o)-based data augmentation
   - Adapting and fine-tuning [`Gemma 3-1B model`](https://huggingface.co/google/gemma-3-1b-it) for the given TST(Text-Style-Transfer) task 
