@@ -6,39 +6,39 @@ This folder contains my main data science and analytics projects, organized by t
 
 ## 1. Global Supermarket Analysis
 
-- Link: 
-- Goal: Exploratory data analysis and visualization on global supermarket sales data.
-- Tech stack: Python, Pandas, Matplotlib/Seaborn.
-- Main notebook/script: `supermarket_analysis.ipynb`
+- Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
+- Goal: Exploratory data analysis and visualization on global supermarket sales data
+- Tech stack: Python, Pandas, Matplotlib/Seaborn
+- Main notebook/script: `supermarket_analysis.ipynb`, `Global_supermarket_Analysis.pdf`
 - Highlights:
-  - Sales performance by region and product category
-  - Customer segmentation and basket analysis
-  - Time-series trends of revenue and orders
+  - Comprehensive EDA on global sales and logistics data
+  - Loss analysis on specific features that is crucial in economic industry
+  - Data-driven business strategy report
 
 ---
 
-## 2. NLP Newspaper (CUAI)
+## 2. News Simplification for Youth using Language Models
 
-- Link: 
-- Goal: Apply NLP techniques to newspaper articles (classification, topic modeling, etc.).
-- Tech stack: 
-- Main notebook/script: `nlp_newspaper.ipynb`
+- Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
+- Goal: Simplify hard-to-understand news articles for young students and teenagers.
+- Tech stack: Python, LLM Fine-Tuning, PyTorch
+- Main notebook/script: `Final_NLP_Newspaper.ipynb`
 - Highlights:
-  - Text preprocessing pipeline (tokenization, stopword removal, TF–IDF)
-  - News category classification model
-  - Basic topic modeling and keyword extraction
+  - Constructing parallel corpus using LLM(GPT-4o)-based data augmentation
+  - Adapting and fine-tuning [`Gemma 3-1B model`](https://huggingface.co/google/gemma-3-1b-it) for the given TST(Text-Style-Transfer) task 
+  - Evaluating the constructed model, for validation of model's maintained accuracy and improved readability
 
 ---
 
 ## 3. Rating-based Recommender System
 
-- Link:
-- Goal: Build a recommendation system using explicit user–item ratings.
-- Tech stack: Python, PyTorch, Pandas.
+- Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
+- Goal: Construction of recommnedation model using crawled data in resturant recommendation website
+- Tech stack: Python, PyTorch, Pandas, Selenium
 - Main notebook/script: `rating_recsys.ipynb`
 - Highlights:
-  - Data pipeline for user–item rating matrix
-  - Baseline models (user/item mean, k-NN)
-  - Matrix factorization or neural CF model with evaluation metrics (RMSE, NDCG, Hit Rate)
+  - Gathering real-time data using web-crawling techniques
+  - Implementation of MF(Matrix-Factorization) based models
+  - 
 
 ---
