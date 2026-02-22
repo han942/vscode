@@ -1,4 +1,4 @@
-# Data Projects Index
+# Data Science Projects
 
 This folder contains my main data science and analytics projects, organized by topic.
 
