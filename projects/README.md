@@ -17,7 +17,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 2. NLP Newspaper (CUAI)
+## 2. News Simplification for Youth using Language Models
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
