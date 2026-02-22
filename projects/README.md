@@ -8,7 +8,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 - Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
 - Goal: Exploratory data analysis and visualization on global supermarket sales data.
-- Tech stack: Python, Pandas, Matplotlib/Seaborn.
+- Tech stack: Python, Pandas, Matplotlib/Seaborn
 - Main notebook/script: `supermarket_analysis.ipynb`
 - Highlights:
   - Comprehensive EDA on global sales and logistics data
@@ -20,13 +20,13 @@ This folder contains my main data science and analytics projects, organized by t
 ## 2. NLP Newspaper (CUAI)
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
-- Goal: Apply NLP techniques to newspaper articles (classification, topic modeling, etc.).
-- Tech stack: 
+- Goal: Simplify hard-to-understand news articles for young students and teenagers.
+- Tech stack: Python, LLM Fine-Tuning
 - Main notebook/script: `nlp_newspaper.ipynb`
 - Highlights:
-  - Text preprocessing pipeline (tokenization, stopword removal, TF–IDF)
-  - News category classification model
-  - Basic topic modeling and keyword extraction
+  - Constructing parallel corpus using LLM(GPT-4o)-based data augmentation
+  - Adapting and fine-tuning `Gemma 3-1B model` for the given TST(Text-Style-Transfer) task 
+  - Evaluating the constructed model, for validation of model's maintained accuracy and improved readability
 
 ---
 
