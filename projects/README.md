@@ -33,12 +33,12 @@ This folder contains my main data science and analytics projects, organized by t
 ## 3. Rating-based Recommender System
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
-- Goal: Construction of recommnedation model using crawled data in resturant recommendation website
-- Tech stack: Python, PyTorch, Pandas, Selenium
-- Main notebook/script: `rating_recsys.ipynb`
+- Goal: Construction of recommnedation model using crawled data from resturant recommendation website
+- Tech stack: Python, PyTorch, Pandas, Selenium, Scikit-learn
+- Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
   - Gathering real-time data using web-crawling techniques
-  - Implementation of MF(Matrix-Factorization) based models
+  - Implementation of various recommendation models
   - 
 
 ---
