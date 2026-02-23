@@ -51,7 +51,7 @@ class  MatrixFactorization():
                 R_pred = np.dot(self.P,self.Q.T) + self.b_u[:,np.newaxis] + self.b_i[np.newaxis,:] + self.global_mean
                 bias_term =  np.sum(np.square(self.b_u)) + np.sum(np.square(self.b_i))
                 # Loss Function
-                loss = (np.sum(np.square(self.R - R_pred)) + self.reg_param*(np.sum(np.square(self.P)) + np.sum(np.square(self.Q)) +bias_term)) / len(self.obs_ind)
+                loss = (np.sum(np.square(self.R - R_pred)) + self.reg_param*(np.sum(np.square(self.P)) + np.sum(np.square(self.Q))+bias_term)) / len(self.obs_ind)
                 print(f'Epoch : {n} , Loss : {loss:4f} , Rooted Loss: {np.sqrt(loss):.2f}')
         return self.P,self.Q,self.b_u,self.b_i
 
@@ -68,7 +68,7 @@ class  MatrixFactorization():
             prediction = test_filtered.copy()
             pred = []
             for val in uilist_test:
-                pred.append(float(np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]].values + bi_df.loc[val[1]].values)) # P,Q is array
+                pred.append(float(np.dot(P_df.loc[val[0]],Q_df.loc[val[1]].T) + bu_df.loc[val[0]].values + bi_df.loc[val[1]].values + self.global_mean)) # P,Q is array
             prediction['rating'] = pred
         
         # else:
