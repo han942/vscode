@@ -30,7 +30,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 3. Rating-based Recommender System
+## 3. Korean Dining Recommendation Project
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
 - Goal: Construction of recommnedation model using crawled data from resturant recommendation website
