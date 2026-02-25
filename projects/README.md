@@ -4,7 +4,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 1. Data visualization and composing business report for global supermarket retail data using Seaborn
+## 1. Data visualization and composing business report for global supermarket retail data with Seaborn
 
 - Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
 - Goal: Exploratory data analysis and visualization on global supermarket sales data
@@ -17,7 +17,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 2. News Simplification for Youth using LLM (Large-Language Models)
+## 2. News Simplification for Youth using LLM (Large-Language Models) Fine-Tuning 
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
