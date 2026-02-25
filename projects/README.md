@@ -4,7 +4,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 1. Global Supermarket Analysis
+## 1. Data visualization and composing business report for global supermarket retail data using Seaborn
 
 - Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
 - Goal: Exploratory data analysis and visualization on global supermarket sales data
