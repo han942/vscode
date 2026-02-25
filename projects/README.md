@@ -17,7 +17,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 2. News Simplification for Youth using Language Models
+## 2. News Simplification for Youth using LLM (Large-Language Models)
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
@@ -30,7 +30,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 3. Korean Dining Recommendation Project
+## 3. Constructing latent factor models for korean dining resturants   
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
 - Goal: Construction of recommnedation model using crawled data from resturant recommendation website
