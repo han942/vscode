@@ -1,6 +1,6 @@
-# Data Science Projects
+# AI/Data Science Projects
 
-This folder contains my main data science and analytics projects, organized by topic.
+This folder contains my main data science/AI projects, organized by topic.
 
 ---
 
