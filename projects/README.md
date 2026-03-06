@@ -17,7 +17,7 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 2. News Simplification for Youth using LLM (Large-Language Models) Fine-Tuning 
+## 2. News Simplification for Youth via Fine-Tuned LLM (Large-Language Model) 
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
