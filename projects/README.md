@@ -17,7 +17,7 @@ This folder contains my main data science/AI projects, organized by topic.
 
 ---
 
-## 2. News Simplification for Youth via Fine-Tuned LLM (Large-Language Model) 
+## 2. News Simplification for Youth via Fine-Tuning LLMs (Large-Language Models) 
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
 - Goal: Simplify hard-to-understand news articles for young students and teenagers.
@@ -30,15 +30,15 @@ This folder contains my main data science/AI projects, organized by topic.
 
 ---
 
-## 3. Constructing latent factor models for korean dining resturants   
+## 3. Constructing text-embedded hybrid recommendation models for korean dining resturants   
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
-- Goal: Construction of recommnedation model using crawled data from resturant recommendation website
+- Goal: Construction of recommnedation model using crawled user review data from resturant recommendation website
 - Tech stack: Python, PyTorch, Pandas, Selenium, Scikit-learn
 - Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
-  - Gathering real-time data using web-crawling techniques
-  - Implementation of various recommendation models
+  - Constructing real-time datasets using web-crawling techniques with Selenium
+  - Text embedding user reviews and integrating into traditional recommendation models 
   - 
 
 ---
