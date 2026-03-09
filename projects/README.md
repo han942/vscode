@@ -20,7 +20,7 @@ This folder contains my main data science/AI projects, organized by topic.
 ## 2. News Simplification for Youth via Fine-Tuning LLMs (Large-Language Models) 
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
-- Goal: Simplify hard-to-understand news articles for young students and teenagers.
+- Goal: Simplify hard news articles for young students and teenagers.
 - Tech stack: Python, LLM Fine-Tuning, PyTorch
 - Main notebook/script: `Final_NLP_Newspaper.ipynb`
 - Highlights:
