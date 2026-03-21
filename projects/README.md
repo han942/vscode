@@ -1,10 +1,10 @@
-# Data Science Projects
+# AI/Data Science Projects
 
-This folder contains my main data science and analytics projects, organized by topic.
+This folder contains my main data science/AI projects, organized by topic.
 
 ---
 
-## 1. Global Supermarket Analysis
+## 1. Data visualization and composing business report for global supermarket retail data with Seaborn
 
 - Link: https://github.com/han942/vscode/tree/main/projects/Global_Supermarket_Analysis
 - Goal: Exploratory data analysis and visualization on global supermarket sales data
@@ -17,10 +17,10 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 2. News Simplification for Youth using Language Models
+## 2. News Simplification for Youth via Fine-Tuning LLMs (Large-Language Models) 
 
 - Link: https://github.com/han942/vscode/tree/main/projects/NLP_Newspaper_CUAI
-- Goal: Simplify hard-to-understand news articles for young students and teenagers.
+- Goal: Simplify hard news articles for young students and teenagers.
 - Tech stack: Python, LLM Fine-Tuning, PyTorch
 - Main notebook/script: `Final_NLP_Newspaper.ipynb`
 - Highlights:
@@ -30,15 +30,15 @@ This folder contains my main data science and analytics projects, organized by t
 
 ---
 
-## 3. Rating-based Recommender System
+## 3. Constructing text-embedded hybrid recommendation models for korean dining resturants   
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
-- Goal: Construction of recommnedation model using crawled data in resturant recommendation website
-- Tech stack: Python, PyTorch, Pandas, Selenium
-- Main notebook/script: `rating_recsys.ipynb`
+- Goal: Construction of recommnedation model using crawled user review data from resturant recommendation website
+- Tech stack: Python, PyTorch, Pandas, Selenium, Scikit-learn
+- Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
-  - Gathering real-time data using web-crawling techniques
-  - Implementation of MF(Matrix-Factorization) based models
+  - Constructing real-time datasets using web-crawling techniques with Selenium
+  - Text embedding user reviews and integrating into traditional recommendation models 
   - 
 
 ---
