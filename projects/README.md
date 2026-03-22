@@ -13,7 +13,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Highlights:
   - Comprehensive EDA on global sales and logistics data
   - Loss analysis on specific features that is crucial in economic industry
-  - Data-driven business strategy report
+  - Compositng data-driven business strategy report
 
 ---
 
@@ -26,7 +26,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Highlights:
   - Constructing parallel corpus using LLM(GPT-4o)-based data augmentation
   - Adapting and fine-tuning [`Gemma 3-1B model`](https://huggingface.co/google/gemma-3-1b-it) for the given TST(Text-Style-Transfer) task 
-  - Evaluating the constructed model, for validation of model's maintained accuracy and improved readability
+  - Evaluating the constructed model for checking model's maintained accuracy and improved readability
 
 ---
 
@@ -34,10 +34,11 @@ This folder contains my main data science/AI projects, organized by topic.
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
 - Goal: Construction of recommnedation model using crawled user review data from resturant recommendation website
-- Tech stack: Python, PyTorch, Pandas, Selenium, Scikit-learn
+- Tech stack: Python, SQL, PyTorch, Pandas, Selenium, Scikit-learn
 - Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
   - Constructing real-time datasets using web-crawling techniques with Selenium
+  - Storing crawled data into local MySQL sever using SQL queries
   - Text embedding user reviews and integrating into traditional recommendation models 
   - 
 
