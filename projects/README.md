@@ -34,7 +34,7 @@ This folder contains my main data science/AI projects, organized by topic.
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
 - Goal: Construction of recommnedation model using crawled user review data from resturant recommendation website
-- Tech stack: Python, SQL, PyTorch, Pandas, Selenium, Scikit-learn
+- Tech stack: Python, SQL, pymysql, PyTorch, Pandas, Selenium, Scikit-learn
 - Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
   - Constructing real-time datasets using web-crawling techniques with Selenium
