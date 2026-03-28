@@ -38,7 +38,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
   - Constructing real-time datasets using web-crawling techniques with Selenium
-  - Storing crawled data into local MySQL sever using SQL queries
+  - Storing & retrieving crawled data into local MySQL sever using SQL queries
   - Text embedding user reviews and integrating into traditional recommendation models 
   - 
 
