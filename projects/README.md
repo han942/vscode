@@ -13,7 +13,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Highlights:
   - Comprehensive EDA on global sales and logistics data
   - Loss analysis on specific features that is crucial in economic industry
-  - Compositng data-driven business strategy report
+  - Composing data-driven business strategy report
 
 ---
 
@@ -24,7 +24,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Tech stack: Python, LLM Fine-Tuning, PyTorch
 - Main notebook/script: `Final_NLP_Newspaper.ipynb`
 - Highlights:
-  - Constructing parallel corpus using LLM(GPT-4o)-based data augmentation
+  - Constructing parallel corpus using LLM(GPT-4o) based data augmentation
   - Adapting and fine-tuning [`Gemma 3-1B model`](https://huggingface.co/google/gemma-3-1b-it) for the given TST(Text-Style-Transfer) task 
   - Evaluating the constructed model for checking model's maintained accuracy and improved readability
 
@@ -33,7 +33,7 @@ This folder contains my main data science/AI projects, organized by topic.
 ## 3. Constructing text-embedded hybrid recommendation models for korean dining resturants   
 
 - Link: https://github.com/han942/vscode/tree/main/projects/rating_recsys
-- Goal: Construction of recommnedation model using crawled user review data from resturant recommendation website
+- Goal: Construction of recommnedation model using crawled user review data from restaurant recommendation website
 - Tech stack: Python, SQL, pymysql, PyTorch, Pandas, Selenium, Scikit-learn
 - Main notebook/script: `diningcode_analysis.ipynb`
 - Highlights:
