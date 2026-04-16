@@ -3,3 +3,6 @@
 - Using NewsPaper Datasets from '국립국어원 신문말뭉치 데이터셋'
 - Using Gemma 3-1b-it, Developing of a Model to Translate News Articles into Language Suitable for Elementary School Students
 ## 
+
+
+<img width="1400" height="1000" alt="image" src="https://github.com/user-attachments/assets/347e9a6a-e892-4458-b0c8-65190d5bb451" />
