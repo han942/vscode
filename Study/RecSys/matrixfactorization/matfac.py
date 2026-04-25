@@ -16,7 +16,7 @@ class  MatrixFactorization():
         self.R_df = R
         self.n_users,self.n_items = R.shape
 
-        self.obs_rows,self.obs_cols = np.nonzero(R) #Index conversion for observed data in UImatrix(R)
+        self.obs_rows,self.obs_cols = np.nonzero(R) #Index conversion for observed data in UI matrix(R)
         self.obs_ind = list(zip(self.obs_rows,self.obs_cols))
 
         self.train_user,self.train_item = train['user'].unique(),train['item'].unique()
