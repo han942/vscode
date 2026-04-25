@@ -1,7 +1,6 @@
 # AI/Data Science Projects
 
 This folder contains my main data science/AI projects, organized by topic.
-- [English](./README.md)
 - [Korean](./README_KOR.md)
 ---
 
