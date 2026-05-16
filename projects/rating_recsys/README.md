@@ -26,5 +26,8 @@
      * 중복되어 수집된 데이터 제거 (Selenium 패키지의 time latency로 인해 발생)
     
 ## 모델 개발
-   * __DeepCONN__ : [Joint Deep Modeling of Users and Items Using Reviews for Recommendation]
+   * __DeepCONN__ : [Joint Deep Modeling of Users and Items Using Reviews for Recommendation](https://arxiv.org/pdf/1701.04783)
+      * 듀얼 네트워크 구조: User/Item(식당)에 대해 작성된 리뷰를 각각 통합하여 병렬로 구성하여 학습함
+      * CNN 기반의 특징 추출: 리뷰 텍스트 데이터의 맥락 및 특징을 효과적으로 추출할 수 있음
+      * 
  
