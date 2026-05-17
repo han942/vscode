@@ -26,7 +26,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Highlights:
   - Constructing parallel corpus using LLM(GPT-4o) based data augmentation
   - Adapting and fine-tuning [`Gemma 3-1B model`](https://huggingface.co/google/gemma-3-1b-it) for the given TST(Text-Style-Transfer) task 
-  - Evaluating the constructed model for checking model's maintained accuracy and improved readability
+  - Validating model's ability to maintain 100% of its factual accuracy in over 75% of the original data, also improving readability for younger audiences.
 
 ---
 
@@ -39,7 +39,7 @@ This folder contains my main data science/AI projects, organized by topic.
 - Highlights:
   - Constructing real-time datasets using web-crawling techniques with Selenium
   - Storing & retrieving crawled data into local MySQL sever using SQL queries
-  - Text embedding user reviews and integrating into traditional recommendation models 
+  - Text embedding user reviews and integrating into traditional recommendation models to achive accurate rating predictions. 
   - 
 
 ---
